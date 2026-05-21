@@ -17,16 +17,16 @@
 <meta property="og:description" content="Experienced Laravel developer building scalable web applications, APIs, and backend systems." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://paras7780.github.io/portfolio/" />
-<meta property="og:image" content="assets/image/paras.png" />
+<meta property="og:image" content="https://paras7780.github.io/portfolio/assets/image/paras.png" />
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Paras Rajyaguru | PHP Laravel Developer" />
 <meta name="twitter:description" content="Building scalable Laravel applications, APIs, and backend systems." />
-<meta name="twitter:image" content="assets/image/paras.png" />
+<meta name="twitter:image" content="https://paras7780.github.io/portfolio/assets/image/paras.png" />
 
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="assets/image/favicon.png" />
+<link rel="icon" type="image/png" href="https://paras7780.github.io/portfolio/assets/image/favicon.png" />
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -520,7 +520,9 @@
     <div class="contact-card reveal">
       <h3>Send me a message</h3>
       <p class="sub">Fill out the form below and I'll respond as soon as possible</p>
-      <form id="contactForm" novalidate>
+      <form action="https://formspree.io/f/mdajerld" method="POST">
+        <input type="hidden" name="_next" value="https://paras7780.github.io/portfolio/">
+        <input type="hidden" name="_subject" value="New Portfolio Message">
         <div class="form-row">
           <div class="form-group">
             <label for="name">Your Name</label>
@@ -733,17 +735,20 @@ const skills = [
     toast.style.borderColor = ok ? 'var(--accent)' : '#ef4444';
     setTimeout(() => toast.classList.remove('show'), 2800);
   }
-  document.getElementById('contactForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const data = new FormData(e.target);
-    const name = data.get('name').trim();
-    const email = data.get('email').trim();
-    const message = data.get('message').trim();
-    if (!name || !email || !message) { showToast('Please fill out all fields', false); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('Please enter a valid email', false); return; }
-    showToast('Message sent! I will be in touch soon.');
-    e.target.reset();
+  document.getElementById('contactForm').addEventListener('submit', function() {
+    showToast('Sending message...');
   });
+  // document.getElementById('contactForm').addEventListener('submit', (e) => {
+  //   e.preventDefault();
+  //   const data = new FormData(e.target);
+  //   const name = data.get('name').trim();
+  //   const email = data.get('email').trim();
+  //   const message = data.get('message').trim();
+  //   if (!name || !email || !message) { showToast('Please fill out all fields', false); return; }
+  //   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('Please enter a valid email', false); return; }
+  //   showToast('Message sent! I will be in touch soon.');
+  //   e.target.reset();
+  // });
 
   /* ============ Footer year ============ */
   document.getElementById('year').textContent = new Date().getFullYear();
