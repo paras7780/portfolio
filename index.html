@@ -520,7 +520,7 @@
     <div class="contact-card reveal">
       <h3>Send me a message</h3>
       <p class="sub">Fill out the form below and I'll respond as soon as possible</p>
-      <form action="https://formspree.io/f/mdajerld" method="POST">
+      <form id="contactForm">
         <input type="hidden" name="_next" value="https://paras7780.github.io/portfolio/">
         <input type="hidden" name="_subject" value="New Portfolio Message">
         <div class="form-row">
@@ -735,8 +735,47 @@ const skills = [
     toast.style.borderColor = ok ? 'var(--accent)' : '#ef4444';
     setTimeout(() => toast.classList.remove('show'), 2800);
   }
-  document.getElementById('contactForm').addEventListener('submit', function() {
+  
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+  
+    const form = e.target;
+    const data = new FormData(form);
+  
+    const name = data.get('name').trim();
+    const email = data.get('email').trim();
+    const message = data.get('message').trim();
+  
+    if (!name || !email || !message) {
+      showToast('Please fill all fields', false);
+      return;
+    }
+  
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showToast('Invalid email address', false);
+      return;
+    }
+  
     showToast('Sending message...');
+  
+    fetch('https://formspree.io/f/xrbqabcd', { // 👈 replace with your real ID
+      method: 'POST',
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        showToast('Message sent successfully!');
+        form.reset();
+      } else {
+        showToast('Something went wrong!', false);
+      }
+    })
+    .catch(() => {
+      showToast('Error sending message', false);
+    });
   });
   // document.getElementById('contactForm').addEventListener('submit', (e) => {
   //   e.preventDefault();
