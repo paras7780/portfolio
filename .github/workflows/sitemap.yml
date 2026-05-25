@@ -1,0 +1,23 @@
+name: Generate Sitemap
+on:
+  push:
+    branches: [ main ] # or 'master'
+jobs:
+  sitemap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Generate sitemap
+        uses: cicirello/generate-sitemap@v1
+        with:
+          base-url-path: https://paras7780.github.io/
+      - name: Commit and push
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sitemap.xml
+          git commit -m "Update sitemap" sitemap.xml
+          git push   
