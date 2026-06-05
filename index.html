@@ -689,7 +689,7 @@ const skills = [
     el.style.transitionDelay = (i % 4) * 70 + 'ms';
     el.innerHTML = `
       <div class="skill-icon"><i class="${s.icon}"></i></div>
-      <h4>${s.name}</h4>
+      <h3>${s.name}</h3>
       <div class="skill-bar-head"><span>Proficiency</span><span class="pct">${s.pct}%</span></div>
       <div class="skill-bar"><div class="skill-bar-fill" data-pct="${s.pct}"></div></div>`;
     skillsGrid.appendChild(el);
